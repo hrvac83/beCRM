@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('dashboard/invoice/newinvoice', 'PagesController@getNewInvoice');
 Route::get('dashboard/invoice', 'PagesController@getInvoice');
 Route::get('dashboard', 'PagesController@postDashboard');
 Route::get('login', 'PagesController@getLogin');

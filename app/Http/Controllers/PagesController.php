@@ -29,4 +29,8 @@ class PagesController extends BaseController
    		return view ('invoice');
 
 	}
+	public function getNewInvoice(){
+   		return view ('newinvoice');
+
+	}
 }
