@@ -17,7 +17,7 @@ class PagesController extends BaseController
 
 	}
 
-	public function postDashboard(){
+	public function getDashboard(){
 		return view ('dashboard');
 	}
 

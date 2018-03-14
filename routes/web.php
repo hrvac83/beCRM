@@ -12,7 +12,9 @@
 */
 Route::get('dashboard/invoice/newinvoice', 'PagesController@getNewInvoice');
 Route::get('dashboard/invoice', 'PagesController@getInvoice');
-Route::get('dashboard', 'PagesController@postDashboard');
+Route::get('dashboard', 'PagesController@getDashboard');
 Route::get('login', 'PagesController@getLogin');
 Route::get('/','PagesController@getIndex' );
+
+
 
