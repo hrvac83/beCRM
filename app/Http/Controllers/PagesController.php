@@ -26,11 +26,11 @@ class PagesController extends BaseController
    	
    	}
    	public function getInvoice(){
-   		return view ('invoice');
+   		return view ('invoice/invoice');
 
 	}
 	public function getNewInvoice(){
-   		return view ('newinvoice');
+   		return view ('invoice/newinvoice');
 
 	}
 }
