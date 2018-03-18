@@ -25,6 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->string('seller_address');
             $table->string('seller_oib');
             $table->string('payment_option');
+            $table->date('invoice_date');
             $table->string('additional_option');
             $table->timestamps();
         });

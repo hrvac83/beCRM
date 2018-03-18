@@ -15,6 +15,6 @@
       </div>
     </div>
 
-@include('partials._javascript')
+@yield('javascript')
   </body>
 </html>
