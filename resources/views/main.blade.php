@@ -5,16 +5,17 @@
 @include('partials._navbar')    
 
     <div class="container-fluid">
-      <div class="row">
+    	<div class="row">
+     
 @include('partials._sidebar')       
 
 
 @yield('content')
-
-
-      </div>
+     
+     	</div>
     </div>
 
 @yield('javascript')
+  
   </body>
 </html>
