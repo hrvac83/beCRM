@@ -111,3 +111,9 @@ body {
 .topmargin {
   margin-top:40px;
 }
+
+.table_outer {
+  height: 21em;
+  border:1px dashed grey;
+  overflow: auto; 
+}

@@ -86,7 +86,7 @@
 		</div>
 
 		<div class="form-row">
-			<div class="form-group col-md-12">
+			<div class="table_outer form-group col-md-12">
 				<!--Table-->
 				<table class="table table-striped">
 				    
@@ -101,7 +101,7 @@
 				            <th>Ukloni stavku</th>
 				        </tr>
 				    </thead>
-				    <tbody>
+				    <tbody>	
 					</tbody>
 				</table>
 
@@ -116,7 +116,5 @@
 @endsection
 
 @section('javascript')
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src ="{{ asset('/js/invoiceitems.js') }}"></script>
 @endsection
