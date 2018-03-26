@@ -15,9 +15,8 @@ class CreateInvoiceItemsTable extends Migration
     {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->integer('invoice_id');
-            $table->string('desctription');
+            $table->string('item_code');
             $table->float('amount');
-            $table->float('price');
             $table->float('tax');
             $table->timestamps();
         });

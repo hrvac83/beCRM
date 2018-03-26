@@ -11,8 +11,7 @@
 |
 */
 Route::resource('dashboard/items', 'ItemController');
-Route::get('dashboard/invoice/newinvoice', 'PagesController@getNewInvoice');
-Route::get('dashboard/invoice', 'PagesController@getInvoice');
+Route::resource('dashboard/invoice', 'InvoiceController');
 Route::get('dashboard', 'PagesController@getDashboard');
 Route::get('login', 'PagesController@getLogin');
 Route::get('/','PagesController@getIndex' );

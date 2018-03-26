@@ -2,7 +2,7 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="/dashboard">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="/dashboard/invoice">Računi</a></li>
-            <li><a href="/dashboard/items/item">Stavke računa</a></li>
+            <li><a href="/dashboard/items/create">Stavke računa</a></li>
             <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
