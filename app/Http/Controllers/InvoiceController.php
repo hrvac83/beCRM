@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Item;
 
-class ItemController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-
-        return view ('items/create');
+        return view ('invoice/invoice');
     }
 
     /**
@@ -25,7 +23,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view ('items/create');
+        return view ('invoice/create');
     }
 
     /**
@@ -36,27 +34,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //data validation
-        $this->validate($request, array(
-            'code' => 'required|max:15',
-            'description' => 'max:191',
-            'module' => 'max:10',
-            'price' => 'numeric'
-        ));
-
-        //store in database
-        $item = new Item;
-
-        $item->company_id = 1;
-        $item->item_code = $request->code;
-        $item->description = $request->description;
-        $item->module = $request->module;
-        $item->price = $request->price;
-
-        $item->save();
-
-        //redirect
-        return redirect()->route('items.create');
+        //
     }
 
     /**
