@@ -3,7 +3,6 @@
 @section('title','|Novi račun')
 
 @section ('content')
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <h1 class="page-header">Novi račun</h1>
   <form>
 		<div class="form-row"> 
@@ -110,9 +109,8 @@
 	  		
 	</form>
 
-</div>
-@endsection
+@stop
 
 @section('javascript')
 <script src ="{{ asset('/js/invoiceitems.js') }}"></script>
-@endsection
+@stop

@@ -17,4 +17,3 @@ Route::get('login', 'PagesController@getLogin');
 Route::get('/','PagesController@getIndex' );
 
 
-

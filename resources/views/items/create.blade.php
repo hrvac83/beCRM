@@ -1,4 +1,4 @@
-c@extends('main')
+@extends('main')
 
 @section('title','|Stavke')
 
@@ -6,11 +6,10 @@ c@extends('main')
 
 	{!! Html::style('css/parsley.css') !!}
 
-@endsection
+@stop
 
 @section ('content')
 
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	 <h1 class="page-header">Stavke računa</h1>
 	 <hr>
 	 <div class="form-row">
@@ -57,15 +56,12 @@ c@extends('main')
 			</table>
 		</div>
 	</div>
+ 
 
-
-
-</div>  
-
-@endsection
+@stop
 
 @section('javascript')
 
 	{!! Html::script('js/parsley.min.js')!!}
 
-@endsection
+@stop

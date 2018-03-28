@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use Session;
 
 class ItemController extends Controller
 {
@@ -14,8 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-
-        return view ('items/create');
+       return redirect()->route('items.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class ItemController extends Controller
     {
         //data validation
         $this->validate($request, array(
-            'code' => 'required|max:15',
+            'code' => 'unique:items,item_code,NULL,id,company_id,1|max:15', //last argument in unique clause should be companyId from session
             'description' => 'max:191',
             'module' => 'max:10',
             'price' => 'numeric'
@@ -54,6 +54,8 @@ class ItemController extends Controller
         $item->price = $request->price;
 
         $item->save();
+
+        $request->session()->flash('success', 'Stavka je uspješno dodana');
 
         //redirect
         return redirect()->route('items.create');

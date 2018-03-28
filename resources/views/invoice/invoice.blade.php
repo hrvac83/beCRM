@@ -4,4 +4,6 @@
 
 @section ('content')
 
-@endsection
+<!-- Invoice welcome page -->
+
+@stop
