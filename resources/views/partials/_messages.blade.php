@@ -2,6 +2,8 @@
 
 	<div class="alert alert-success" role="alert">
   		<strong> {{ Session::get('success') }} </strong>
+  		<br>
+  		{{ Session::get('description') }}
 	</div>
 
 @endif

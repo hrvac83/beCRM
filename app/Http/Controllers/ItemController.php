@@ -25,7 +25,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view ('items/create');
+        $items= Item::where('company_id',1)->get();
+
+        return view ('items/create')->with('items', $items);
     }
 
     /**
@@ -55,7 +57,8 @@ class ItemController extends Controller
 
         $item->save();
 
-        $request->session()->flash('success', 'Stavka je uspješno dodana');
+        $request->session()->flash('success', 'Stavka sa šifrom '.$request->code.' je uspješno dodana');
+        $request->session()->flash('description', 'Opis: '.$request->description.' J.M.: '.$request->module.' Cijena: '.$request->price);
 
         //redirect
         return redirect()->route('items.create');
@@ -103,6 +106,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item= Item::where('item_code',$id)->get();
+        $item->delete();         //have to change migrations - items table-- add primary key to enable delete
+        Session::flash('success', 'Stavka sa šifrom '.$id.'je uspješno obrisana');
+        return redirect()->route('items.create');
+
     }
 }
