@@ -106,9 +106,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $item= Item::where('item_code',$id)->get();
-        $item->delete();         //have to change migrations - items table-- add primary key to enable delete
+
+        Item::where('item_code',$id)->where('company_id',1)->delete();
         Session::flash('success', 'Stavka sa šifrom '.$id.'je uspješno obrisana');
+        
         return redirect()->route('items.create');
 
     }
