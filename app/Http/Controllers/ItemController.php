@@ -95,7 +95,32 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate data
+        $this->validate($request, array(
+            'item_code' => 'unique:items,item_code,NULL,id,company_id,1|max:15', //last argument in unique clause should be companyId from session
+            'description' => 'max:191',
+            'module' => 'max:10',
+            'price' => 'numeric'
+        ));
+
+        //save data (update) to database
+
+        //no request properties set -- maybe form cant take values from dynamically generated inputs
+
+        $item= Item::where('item_code',$id)->where('company_id',1)->get();
+        $item->item_code = $request->item_code;
+        $item->description = $request->description;
+        $item->module = $request->module;
+        $item->price = $request->price;
+        //Item::where('item_code',$id)->where('company_id',1)->update(....);->ovu metodu koristit,
+        //$item->save();
+        
+
+        //flash data
+        Session::flash('success', 'Stavka je uspješno spremljena');
+
+        //redirect
+        return redirect()->route('items.create');
     }
 
     /**
@@ -108,7 +133,7 @@ class ItemController extends Controller
     {
 
         Item::where('item_code',$id)->where('company_id',1)->delete();
-        Session::flash('success', 'Stavka sa šifrom '.$id.'je uspješno obrisana');
+        Session::flash('success', 'Stavka sa šifrom '.$id.' je uspješno obrisana');
         
         return redirect()->route('items.create');
 
