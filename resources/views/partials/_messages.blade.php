@@ -8,16 +8,6 @@
 
 @endif
 
-<!-- ista stvar kao gore 
-<?php
-/*
-if(Session::has('success')){
-	echo ('<div class="alert alert-success" role="alert">
-  			<strong>'.Session::get('success').'</strong></div>');
-};
-*/
-?>
--->
 
 @if (count($errors)>0)
 

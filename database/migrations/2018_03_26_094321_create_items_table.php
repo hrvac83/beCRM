@@ -14,6 +14,7 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('company_id');
             $table->string('item_code');
             $table->string('description');

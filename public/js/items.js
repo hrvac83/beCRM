@@ -2,46 +2,48 @@ $(document).ready(function(){
 
 	$("tbody").on( "click", ".btn-primary", function() {
 
-		num = $(this).closest('tr').find('td').html();
+		num1 = $(this).closest('tr').find('td').html();
+		num = num1.split('<')[0];
+		id = $(this).closest('tr').find("#id_"+num).val();
 		code = $(this).closest('tr').find('td').eq(1).html();
 		desc = $(this).closest('tr').find('td').eq(2).html();
 		mod = $(this).closest('tr').find('td').eq(3).html();
 		price = $(this).closest('tr').find('td').eq(4).html();
 
-		$(this).closest('tr').find('td').eq(1).html("<input type=\"text\" class=\"form-control\" name=\"item_code\" id=\"item_code\" value=\""+code+"\">");
-		$(this).closest('tr').find('td').eq(2).html("<input type=\"text\" class=\"form-control\" name=\"description\" id=\"description\" value=\""+desc+"\">");
-		$(this).closest('tr').find('td').eq(3).html("<input type=\"text\" class=\"form-control\" name=\"module\" id=\"module\" value=\""+mod+"\">");
-		$(this).closest('tr').find('td').eq(4).html("<input type=\"text\" class=\"form-control\" name=\"price\"id=\"price\" value=\""+price+"\">");
 		
-		$("#edit_"+num).attr("style","visibility:hidden");
-		$("#del_"+num).attr("style","visibility:hidden");
-		$("#save_"+num).attr("style","visibility:visible");
-		$("#cancel_"+num).attr("style","visibility:visible");
-
-		/*
-		$(this).parent().parent().html("<td>"+num+"</td><td><input type=\"text\" class=\"form-control\" id=\"code\" value=\""+code+"\"></td>"+
-										"<td><input type=\"text\" class=\"form-control\" id=\"desc\" value=\""+desc+"\"></td>"+
-										"<td><input type=\"text\" class=\"form-control\" id=\"mod\" value=\""+mod+"\"></td>"+
-										"<td><input type=\"text\" class=\"form-control\" id=\"price\" value=\""+price+"\"></td>"+
-										"<td><button type=\"button\" class=\"btn btn-success btn-sm btn-save\">Spremi</button></td>");
-		*/
+		$(this).parent().parent().html("<td>"+num+"</td><td><input type=\"text\" class=\"form-control\" name=\"u-code\" id=\"u-code_"+code+"\" value=\""+code+"\">"+
+										"</td><td><input type=\"text\" class=\"form-control\" name=\"u-description\" id=\"u-description_"+code+"\" value=\""+desc+"\">"+
+										"</td><td><input type=\"text\" class=\"form-control\" name=\"u-module\" id=\"u-module_"+code+"\" value=\""+mod+"\">"+
+										"</td><td><input type=\"text\" class=\"form-control\" name=\"u-price\"id=\"u-price_"+code+"\" value=\""+price+"\">"+
+										"</td><td><input class=\"btn btn-success btn-xs save_btn\" value=\"Spremi\" data-code=\""+code+"\">"+
+										"<input class=\"btn btn-warning btn-xs \" value=\"Odustani\"</td>");
 		
 	});
+
+
+	$("tbody").on( "click", ".save_btn", function() {
+		
+		var j_code  = $(this).data('code');
+		var u_code  = $('#u-code_'+j_code).val();
+		var u_desc = $('#u-description_'+j_code).val();
+		var u_module = $('#u-module_'+j_code).val();
+		var u_price = $('#u-price_'+j_code).val();
+		var token = $("input[name='_token']").val();
+		var tpl_path = $("#update_route").val();
+		var real_path = tpl_path.replace('ID', id);
+
+		console.log(u_code);
+		$.post( real_path, { _token: token, _method: "PUT", test: "success", description: u_desc, module:u_module, price:u_price, item_code:u_code })
+		  .done(function( data ) {
+		    alert(data.test);
+		    location.reload(true);
+		  });
+
+	});
+
 
 	$("tbody").on( "click", ".btn-warning", function() {
 		location.reload(true);
 	});
-
-	/*
-	$("tbody").on( "click", ".btn-save", function() {
-
-		num = $(this).closest('tr').find('td').html();
-		code = $(this).closest('tr').find('#code').val();
-		desc = $(this).closest('tr').find('#desc').val();
-		mod = $(this).closest('tr').find('#mod').val();
-		price = $(this).closest('tr').find('#price').val();
-		
-	});
-	*/
 
 });

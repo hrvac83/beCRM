@@ -55,41 +55,32 @@
 				<tbody>
 					
 					@foreach($items as $key => $row)
-							<tr>{!! Form::open(array('route'=>['items.update',$row->item_code], "method" => "PUT" )) !!}
-								<td>{{ $key+1 }}</td>
+					
+							<tr>
+								<td>{{ $key+1 }}<input type="hidden" id="id_{{$key+1}}" value="{{ $row->id }}"></td>
 								<td>{{ $row->item_code }}</td>
 								<td>{{ $row->description }}</td>
 								<td>{{ $row->module }}</td>
 								<td>{{ $row->price }}</td>
-								<td>
-									<div class="btn-group btn-block">
-										{!! Form::submit('Spremi', array('class'=>'btn btn-success btn-xs', 'id'=>'save_'.($key+1), 'style'=>'visibility:hidden')) !!}
-										{!! Form::close()!!}
-
-										{{ Form::button('Poništi', array('class' => 'btn btn-warning btn-xs', 'id'=>'cancel_'.($key+1),'style'=>'visibility:hidden')) }}
-									</div>
-									<div class="btn-group btn-block">
-										{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-xs', 'id'=>'edit_'.($key+1))) }}
-
-										{!! Form::open(["route"=>["items.destroy", $row->item_code], "method" => "DELETE"]); !!}
-
-										{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-xs", 'id'=>'del_'.($key+1))); !!}
-
-										{!! Form::close(); !!}
-									</div>
+								<td>										
+									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-xs', 'id'=>'edit_'.($key+1))) }}
+									{!! Form::open(["route"=>["items.destroy", $row->item_code], "method" => "DELETE"]); !!}
+									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-xs", 'id'=>'del_'.($key+1))); !!}
+									{!! Form::close(); !!}
 								</td>
 								
 							</tr>
 					@endforeach
 						
-					
-					
 				</tbody>
 			</table>
+			<div class="text-center">
+				{!! $items->links(); !!}
+			</div>
 		</div>
 	</div>
 	
- 
+ <input type="hidden" id="update_route" value="{{ route('items.update', ['id' => 'ID']) }}">
 
 @stop
 
