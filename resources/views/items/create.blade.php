@@ -56,16 +56,16 @@
 					
 					@foreach($items as $key => $row)
 					
-							<tr>
+							<tr id="row_{{$key+1}}">
 								<td>{{ $key+1 }}<input type="hidden" id="id_{{$key+1}}" value="{{ $row->id }}"></td>
-								<td>{{ $row->item_code }}</td>
-								<td>{{ $row->description }}</td>
-								<td>{{ $row->module }}</td>
-								<td>{{ $row->price }}</td>
+								<td id="code_{{$key+1}}">{{ $row->item_code }}</td>
+								<td id="desc_{{$key+1}}">{{ $row->description }}</td>
+								<td id="mod_{{$key+1}}">{{ $row->module }}</td>
+								<td id="price_{{$key+1}}">{{ $row->price }}</td>
 								<td>								
-									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-xs', 'id'=>'edit_'.($key+1))) }}
+									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-block btn-xs edit_btn')) }}
 									{!! Form::open(["route"=>["items.destroy", $row->item_code], "method" => "DELETE"]); !!}
-									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-xs", 'id'=>'del_'.($key+1))); !!}
+									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-block btn-xs del_btn")); !!}
 									{!! Form::close(); !!}
 								</td>
 								

@@ -1,25 +1,26 @@
 $(document).ready(function(){
 
 
-	$("tbody").on( "click", ".btn-primary", function() {
+	$("tbody").on( "click", ".edit_btn", function() {
 
 		num1 = $(this).closest('tr').find('td').html();
 		num = num1.split('<')[0];
 		id = $("#id_"+num).val();
-		code = $(this).closest('tr').find('td').eq(1).html();
-		desc = $(this).closest('tr').find('td').eq(2).html();
-		mod = $(this).closest('tr').find('td').eq(3).html();
-		price = $(this).closest('tr').find('td').eq(4).html();
+		code = $("#code_"+num).html();
+		desc = $("#desc_"+num).html();
+		mod = $("#mod_"+num).html();
+		price = $("#price_"+num).html();
 
 		
-		$(this).parent().parent().html("<td>"+num+"</td><td><input type=\"text\" class=\"form-control\" required=\"\" maxlength=\"15\" name=\"u-code\" id=\"u-code_"+code+"\" value=\""+code+"\">"+
-										"</td><td><input type=\"text\" class=\"form-control\" required=\"\" maxlength=\"191\" name=\"u-description\" id=\"u-description_"+code+"\" value=\""+desc+"\">"+
-										"</td><td><input type=\"text\" class=\"form-control\" maxlength=\"10\" name=\"u-module\" id=\"u-module_"+code+"\" value=\""+mod+"\">"+
-										"</td><td><input type=\"text\" class=\"form-control\" data-parsley-type=\"number\" step=\"0.1\" name=\"u-price\"id=\"u-price_"+code+"\" value=\""+price+"\">"+
-										"</td><td><input class=\"btn btn-success btn-xs save_btn\" value=\"Spremi\" data-code=\""+code+"\">"+
-										"<input class=\"btn btn-warning btn-xs \" value=\"Odustani\"</td>");
+		$("#row_"+num).html("<td>"+num+"</td><td><input type=\"text\" class=\"form-control\" required=\"\" maxlength=\"15\" name=\"u-code\" id=\"u-code_"+code+"\" value=\""+code+"\">"+
+							"</td><td><input type=\"text\" class=\"form-control\" required=\"\" maxlength=\"191\" name=\"u-description\" id=\"u-description_"+code+"\" value=\""+desc+"\">"+
+							"</td><td><input type=\"text\" class=\"form-control\" maxlength=\"10\" name=\"u-module\" id=\"u-module_"+code+"\" value=\""+mod+"\">"+
+							"</td><td><input type=\"text\" class=\"form-control\" data-parsley-type=\"number\" step=\"0.1\" name=\"u-price\"id=\"u-price_"+code+"\" value=\""+price+"\">"+
+							"</td><td><input class=\"btn btn-success btn-xs save_btn\" value=\"Spremi\" data-code=\""+code+"\">"+
+							"<input class=\"btn btn-warning btn-xs \" value=\"Odustani\"</td>");
 		
-		$(".btn-primary").css("visibility", "hidden");
+		$(".edit_btn").css("visibility", "hidden");
+		$(".del_btn").css("visibility", "hidden");
 		
 	});
 
