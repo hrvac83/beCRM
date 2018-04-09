@@ -25,7 +25,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $items= Item::where('company_id',1)->orderBy('id', 'desc')->paginate(5);
+        $items= Item::where('company_id',1)->orderBy('id', 'desc')->paginate(10);
 
         return view ('items/create')->with('items', $items);
     }
@@ -112,8 +112,7 @@ class ItemController extends Controller
         Session::flash('success', 'Stavka je uspješno uređena');
         Session::flash('description', 'Šifra: '.$request->item_code.' Opis: '.$request->description.' J.M.: '.$request->module.' Cijena: '.$request->price);
 
-        //redirect
-        return $request;
+        return ('Update successful');
     }
 
     /**

@@ -38,9 +38,9 @@
 			
 	 <div class="row">
 		 <div class="form-group col-md-12">
-					<!--Table-->
+					<!--Table-->		
 			 <table class="table table-striped">
-						    
+ 
 				<!--Table head-->
 				<thead>
 					<tr>
@@ -62,7 +62,7 @@
 								<td>{{ $row->description }}</td>
 								<td>{{ $row->module }}</td>
 								<td>{{ $row->price }}</td>
-								<td>										
+								<td>								
 									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-xs', 'id'=>'edit_'.($key+1))) }}
 									{!! Form::open(["route"=>["items.destroy", $row->item_code], "method" => "DELETE"]); !!}
 									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-xs", 'id'=>'del_'.($key+1))); !!}
@@ -74,8 +74,11 @@
 						
 				</tbody>
 			</table>
+
 			<div class="text-center">
 				{!! $items->links(); !!}
+				<br>
+				{{ 'Page '.$items->currentPage().' of '.ceil($items->total()/$items->perPage()) }}
 			</div>
 		</div>
 	</div>
