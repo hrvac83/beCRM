@@ -13,7 +13,7 @@
 Route::resource('dashboard/items', 'ItemController');
 Route::resource('dashboard/invoice', 'InvoiceController');
 Route::get('dashboard', 'PagesController@getDashboard');
-Route::get('login', 'PagesController@getLogin');
+Route::get('login', ['uses'=>'PagesController@getLogin', 'as' => 'page.login']);
 Route::get('/','PagesController@getIndex' );
 
 

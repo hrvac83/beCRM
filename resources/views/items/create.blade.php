@@ -63,9 +63,9 @@
 								<td id="mod_{{$key+1}}">{{ $row->module }}</td>
 								<td id="price_{{$key+1}}">{{ $row->price }}</td>
 								<td>								
-									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-block btn-xs edit_btn')) }}
+									{{ Form::button('Uredi', array('class' => 'btn btn-primary btn-xs btn-block edit_btn')) }}
 									{!! Form::open(["route"=>["items.destroy", $row->item_code], "method" => "DELETE"]); !!}
-									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-block btn-xs del_btn")); !!}
+									{!! Form::submit("Briši ", array("class"=>"btn btn-danger btn-xs btn-block del_btn")); !!}
 									{!! Form::close(); !!}
 								</td>
 								
