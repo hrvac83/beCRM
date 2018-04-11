@@ -10,8 +10,8 @@
 
 @section ('content')
 
-	 <h1 class="page-header">Stavke računa</h1>
-	 <hr>
+	 <h2 class="page-header">Stavke računa</h2>
+	</br>
 	 <div class="form-row">
 			{!! Form::open(array('route' => 'items.store', 'data-parsley-validate' => '')) !!}
 			<div class="form-group col-md-2">
