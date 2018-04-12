@@ -13,6 +13,9 @@
 
 @include('partials._messages')
 
+<!--temporary help-->
+{{Auth::check()? "Logged in":"Logged out"}} 
+
 @yield('content')
 
 			</div>     
