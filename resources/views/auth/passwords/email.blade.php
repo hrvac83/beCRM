@@ -10,11 +10,18 @@
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		{!! Html::script('js/parsley.min.js') !!}
 
-		<title>Prijava</title>
+		<title>Zaboravljena lozinka</title>
 
 	</head>
 	<body>
 		<!--temporary errors experiment-->
+		@if (session('status'))
+
+			<div class="alert alert-success" role="alert">
+		  		<strong> {{ session('status') }} </strong>
+			</div>
+
+		@endif
 		@if (count($errors)>0)
 
 			<div class="alert alert-danger" role="alert">
@@ -26,33 +33,23 @@
 			</div>
 
 		@endif
-		
-		<!--temporary help-->
-		{{Auth::check()? "Logged in":"Logged out"}}
-
 		<div class="container">
 		    <div class="row">
 		        <div class="col-md-offset-5 col-md-3">
 		            <div class="form-login">
-		            	<h4 class="page-header">Prijava</h4>
-			            {!! Form::open(array('data-parsley-validate' => '')) !!}
-			            {{	Form::email('email', null, array('class'=>'form-control input-sm chat-input', 'placeholder'=>'email', 'maxlength'=>'50','required'=>'')) }}
-			            </br>
-			            {{	Form::password('password', array('class'=>'form-control input-sm chat-input','placeholder'=>'Lozinka', 'maxlength'=>'20','required'=>'')) }}
-			            </br>
-			            {{ Form::checkbox('remember') }}
-			            {{ Form::label('remember', "Zapamti me") }}
-			            </br>
-				        {{ Form::submit('Prijavi se ', array('class'=>'btn btn-primary btn-block')) }}
+		            	<h4 class="page-header">Reset lozinke</h4>
+			            {!! Form::open(array('url'=>'password/email', 'data-parsley-validate' => '')) !!}
+
+			            {{ Form::label('email','Email:') }}
+			            {{	Form::email('email', null, array('class'=>'form-control input-sm chat-input', 'maxlength'=>'50','required'=>'')) }}
+				        {{ Form::submit('Reset', array('class'=>'btn btn-primary btn-block')) }}
+			            
 			            {!! Form::close() !!}
-			            <br>
-			            <a href="{{ url('password/reset') }}">Zaboravljena lozinka</a>
 		            </div>
 		        
 		        </div>
 		    </div>
 		</div>
-	
 
 	</body>
-</html>	
+</html>

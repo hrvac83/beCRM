@@ -10,7 +10,7 @@
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		{!! Html::script('js/parsley.min.js') !!}
 
-		<title>Prijava</title>
+		<title>Zaboravljena lozinka</title>
 
 	</head>
 	<body>
@@ -26,33 +26,31 @@
 			</div>
 
 		@endif
-		
-		<!--temporary help-->
-		{{Auth::check()? "Logged in":"Logged out"}}
-
 		<div class="container">
 		    <div class="row">
 		        <div class="col-md-offset-5 col-md-3">
 		            <div class="form-login">
-		            	<h4 class="page-header">Prijava</h4>
-			            {!! Form::open(array('data-parsley-validate' => '')) !!}
-			            {{	Form::email('email', null, array('class'=>'form-control input-sm chat-input', 'placeholder'=>'email', 'maxlength'=>'50','required'=>'')) }}
+		            	<h4 class="page-header">Reset lozinke</h4>
+			            {!! Form::open(array('url'=>'password/reset', 'data-parsley-validate' => '')) !!}
+
+			            {{ Form::hidden('token', $token) }}
+			            {{ Form::label('email','Email:') }}
+			            {{	Form::email('email', $email, array('class'=>'form-control input-sm chat-input', 'maxlength'=>'50','required'=>'')) }}
 			            </br>
-			            {{	Form::password('password', array('class'=>'form-control input-sm chat-input','placeholder'=>'Lozinka', 'maxlength'=>'20','required'=>'')) }}
+			            {{ Form::label('password', 'Nova lozinka:') }}
+			            {{	Form::password('password', array('class'=>'form-control input-sm chat-input','placeholder'=>'Lozinka', 'minlength'=>'6', 'maxlength'=>'20','required'=>'')) }}
 			            </br>
-			            {{ Form::checkbox('remember') }}
-			            {{ Form::label('remember', "Zapamti me") }}
-			            </br>
-				        {{ Form::submit('Prijavi se ', array('class'=>'btn btn-primary btn-block')) }}
+			            {{ Form::label('password_confirmation', 'Potvrdi novu lozinku:') }}
+			            {{	Form::password('password_confirmation', array('class'=>'form-control input-sm chat-input','placeholder'=>'Ponovite lozinku', 'minlength'=>'6', 'maxlength'=>'20','required'=>'')) }}
+			        	</br>
+				        {{ Form::submit('Reset', array('class'=>'btn btn-primary btn-block')) }}
+			            
 			            {!! Form::close() !!}
-			            <br>
-			            <a href="{{ url('password/reset') }}">Zaboravljena lozinka</a>
 		            </div>
 		        
 		        </div>
 		    </div>
 		</div>
-	
 
 	</body>
-</html>	
+</html>
