@@ -48,6 +48,8 @@
 			            </br>
 				        {{ Form::submit('Registriraj se ', array('class'=>'btn btn-primary btn-md btn-block')) }}
 			            {!! Form::close() !!}
+			        	</br>
+			            <a href="{{ url('/login') }}">Prijava</a>
 		            </div>
 		        
 		        </div>

@@ -47,6 +47,8 @@
 			            {!! Form::close() !!}
 			            <br>
 			            <a href="{{ url('password/reset') }}">Zaboravljena lozinka</a>
+			        	</br>
+			            <a href="{{ url('/register') }}">Registracija</a>
 		            </div>
 		        
 		        </div>

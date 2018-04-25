@@ -31,6 +31,7 @@ class ItemController extends Controller
      */
     public function create()
     {
+        
         $items= Item::where('company_id',1)->orderBy('id', 'desc')->paginate(10);
 
         return view ('items/create')->with('items', $items);
