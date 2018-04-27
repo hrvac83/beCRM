@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+    protected $fillable = [
+        'name','address', 'email', 'oib','phone'
+    ];
     public function users()
     {
     	return $this->hasMany('App\User');

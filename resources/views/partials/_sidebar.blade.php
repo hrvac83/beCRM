@@ -3,6 +3,7 @@
             <li class="{{ Request::is('dashboard')? "active" : "" }}"><a href="{{  url('dashboard') }}">Dashboard</a></li>
             <li class="{{ Request::is('dashboard/invoice')||Request::is('dashboard/invoice/create')? "active" : "" }}"><a href="{{  url('dashboard/invoice') }}">Računi</a></li>
             <li class="{{ Request::is('dashboard/items/create')? "active" : "" }}"><a href="{{  url('dashboard/items/create') }}">Stavke računa</a></li>
+            <li class="{{ Request::is('dashboard/company')? "active" : "" }}"><a href="{{  url('dashboard/company') }}">Tvrtka</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Nav item</a></li>

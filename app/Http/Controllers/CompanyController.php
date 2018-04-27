@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Company;
+use App\User;
+use Session;
 
 class CompanyController extends Controller
 {
@@ -18,7 +21,14 @@ class CompanyController extends Controller
      */
     public function index()
     {
-       return view('company/index');
+       if (\Auth::user()->company_id == NULL)
+        {
+            return redirect()->route('company.create');
+        }
+
+        $company= Company::find(\Auth::user()->company_id);
+
+        return view('company/index')->with('company',$company);
     }
 
     /**
@@ -28,6 +38,11 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        if (\Auth::user()->company_id != NULL)
+        {
+            return redirect()->route('company.index');
+        }
+
         return view('company/create');
     }
 
@@ -39,7 +54,26 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validate data
+
+        //Save data
+        $company = new Company;
+        $company->name=$request->name;
+        $company->address=$request->address;
+        $company->oib=$request->oib;
+        $company->email='';
+        $company->phone='';
+        $company->save();
+
+        $company = Company::where('oib', $request->oib)->get();
+        $user = User::where('id', \Auth::user()->id);
+        $user->update(['company_id' => $company[0]->id]);
+        
+        //Flash success
+        $request->session()->flash('success', 'Tvrtka '.$request->name.' je uspješno prijavljena');
+
+        //Redirect
+        return redirect()->route('company.index');
     }
 
     /**
@@ -61,7 +95,10 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company= Company::find($id);
+        $uri = url('dashboard/company/'.$id);
+
+        return view('company/edit')->with('company', $company)->with('uri', $uri);
     }
 
     /**
@@ -73,7 +110,22 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        //Validate data
+
+        //Update
+        $company = Company::find($id);
+        $company->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'oib' => $request->oib
+        ]);
+
+        //Flash success
+        $request->session()->flash('success', 'Tvrtka '.$request->name.' je uspješno uređena');
+
+        //Redirect
+        return redirect()->route('company.index');
     }
 
     /**

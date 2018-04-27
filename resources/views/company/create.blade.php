@@ -19,7 +19,7 @@
 		{{ Form::label('address', 'Adresa tvrtke:')	}}
 		{{ Form::text('address', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'191')) }}
 		{{ Form::label('oib', 'OIB/PDV-id:')	}}
-		{{ Form::text('name', null, array('class'=>'form-control', 'maxlength'=>'20')) }}
+		{{ Form::text('oib', null, array('class'=>'form-control', 'maxlength'=>'20')) }}
 
 		</br>
 		{{ Form::submit('Spremi', array('class'=>'btn btn-success btn-block')) }}
