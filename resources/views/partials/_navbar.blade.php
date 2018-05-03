@@ -7,7 +7,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">beCRM</a>
+          @if (Auth::user()->company_id != NULL)
+            <p class="navbar-brand"><strong> {{ Auth::user()->company->name }} </strong>Korisnik: <strong>{{ Auth::user()->name }}
+             {{ Auth::user()->last_name }}</strong></p>
+          @else
+            <a class="navbar-brand" href="{{ route('company.create') }}">Prijavi tvrtku!</a>
+          @endif
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

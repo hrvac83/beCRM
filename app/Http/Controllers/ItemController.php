@@ -31,7 +31,7 @@ class ItemController extends Controller
     public function create()
     {
         
-        $items= Item::where('company_id',1)->orderBy('id', 'desc')->paginate(10);
+        $items= Item::where('company_id', \Auth::user()->company_id)->orderBy('id', 'desc')->paginate(10);
 
         return view ('items/create')->with('items', $items);
     }
@@ -55,7 +55,7 @@ class ItemController extends Controller
         //store in database
         $item = new Item;
 
-        $item->company_id = 1;
+        $item->company_id = \Auth::user()->company_id;
         $item->item_code = $request->code;
         $item->description = $request->description;
         $item->module = $request->module;
@@ -70,27 +70,6 @@ class ItemController extends Controller
         return redirect()->route('items.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -130,7 +109,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
 
-        Item::where('item_code',$id)->where('company_id',1)->delete();
+        Item::where('item_code',$id)->where('company_id', \Auth::user()->company_id)->delete();
         Session::flash('success', 'Stavka sa šifrom '.$id.' je uspješno obrisana');
         
         return redirect()->route('items.create');

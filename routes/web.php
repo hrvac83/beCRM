@@ -25,8 +25,8 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::resource('dashboard/company', 'CompanyController');
-Route::resource('dashboard/items', 'ItemController');
+Route::resource('dashboard/company', 'CompanyController', ['except' => ['show', 'destroy']]);
+Route::resource('dashboard/items', 'ItemController', ['except' => ['show', 'edit']]);
 Route::resource('dashboard/invoice', 'InvoiceController');
 
 Route::get('dashboard', 'PagesController@getDashboard')->middleware('auth');

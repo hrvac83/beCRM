@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Invoice;
+use App\InvoiceItem;
+use App\Item;
 
 class InvoiceController extends Controller
 {
@@ -17,7 +20,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return view ('invoice/invoice');
+        //temporary - until invoice/create is finished
+        return redirect()->route('invoice.create');
     }
 
     /**
@@ -27,7 +31,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view ('invoice/create');
+        $items = Item::where('company_id', \Auth::user()->company_id)->get();
+        return view ('invoice/create')->with('items', $items);
     }
 
     /**
