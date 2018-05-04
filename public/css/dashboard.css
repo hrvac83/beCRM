@@ -113,7 +113,7 @@ body {
 }
 
 .table_outer {
-  height: 30em;
+  height: 20em;
   border:1px dashed grey;
   overflow: auto; 
 }

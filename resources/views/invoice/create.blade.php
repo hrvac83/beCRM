@@ -165,6 +165,19 @@
 		
 	</form>
 
+	<div class="form-row">
+		<div class="form-group col-md-12">
+			<div class="well col-md-3">
+				<h5>Ukupna cijena bez PDV-a:</h5>
+				<strong><p id="price_without_tax">0.00</p></strong>
+				<h5>Ukupna cijena:</h5>
+				<strong><p id="price_with_tax">0.00</p></strong>
+			</div>
+		</div>
+	</div>
+
+	<input type="hidden" id="store_route" value="{{ route('invoice.store') }}">
+
 @stop
 
 @section('javascript')
