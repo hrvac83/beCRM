@@ -46,7 +46,7 @@ class ItemController extends Controller
     {
         //data validation
         $this->validate($request, array(
-            'code' => 'unique:items,item_code,NULL,id,company_id,1|max:15', //last argument in unique clause should be companyId from session
+            'code' => 'unique:items,item_code,NULL,id,company_id,'.\Auth::user()->company_id.'|max:15',
             'description' => 'max:191',
             'module' => 'max:10',
             'price' => 'numeric'
@@ -83,7 +83,7 @@ class ItemController extends Controller
 
         //validate data
         $this->validate($request, array(
-            'item_code'=>'unique:items,item_code,'.$id.',id,company_id,1|max:15',
+            'item_code'=>'unique:items,item_code,'.$id.',id,company_id,'.\Auth::user()->company_id.'|max:15',
             'description' => 'max:191',
             'module' => 'max:10',
             'price' => 'numeric'

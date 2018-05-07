@@ -114,6 +114,7 @@ body {
 
 .table_outer {
   height: 20em;
-  border:1px dashed grey;
+  border:1px solid Gainsboro;
+  border-radius: 10px;
   overflow: auto; 
 }

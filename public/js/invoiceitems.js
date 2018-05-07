@@ -13,9 +13,26 @@ $(document).ready(function(){
 		var price_sub;
 		var amount_sub;
 		var tax_sub;
-		
+
+		var date_input=$('input[name="date"]'); 
+      	var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      	var options={
+	        format: 'dd/mm/yyyy',
+	        container: container,
+	        todayHighlight: true,
+	        autoclose: true,
+      	};
+      	date_input.datepicker(options);
+	
 
 		$('#additem').click(function(){
+
+			$("#code").parsley().validate();
+			$("#description").parsley().validate();
+			$("#module").parsley().validate();
+			$("#price").parsley().validate();
+			$("#amount").parsley().validate();
+			$("#tax").parsley().validate();
 
 			if ((code.val()=="")||(description.val()=="")||(module.val()=="")||(price.val()=="")||(amount.val()=="")||(tax.val()=="")){
 				alert('Sva polja moraju biti ispunjena');
@@ -23,8 +40,8 @@ $(document).ready(function(){
 			else
 			{
 				i+=1;
-				$("#item_table").append('<tr><th id="'+i+'"scope="row">'+i+'</th><td>'+code.val()+'</td><td>'+description.val()+
-					'</td><td>'+module.val()+'</td><td class="price">'+price.val()+'</td><td class="amount">'+amount.val()+'</td><td class="tax">'+tax.val()+'</td>'+
+				$("#item_table").append('<tr><th id="'+i+'"scope="row">'+i+'</th><td class="code">'+code.val()+'</td><td class="description">'+description.val()+
+					'</td><td class="module">'+module.val()+'</td><td class="price">'+price.val()+'</td><td class="amount">'+amount.val()+'</td><td class="tax">'+tax.val()+'</td>'+
 					'<td><input type="button" class="btn btn-danger" value="X"></td></tr>');
 
 				sum_wo_tax +=(+price.val())*(+amount.val());
@@ -90,6 +107,37 @@ $(document).ready(function(){
 
         	$('#itemsModal').modal('hide');
     	});
+
+    	$("#create_invoice").click(function(){
+
+    		//data validation
+            $("#sellerName").parsley().validate();
+            $("#sellerAddress").parsley().validate();
+            $("#sellerOib").parsley().validate();
+            $("#buyerName").parsley().validate();
+            $("#buyerAddress").parsley().validate();
+            $("#buyerOib").parsley().validate();
+            $("#date").parsley().validate();
+
+            var rowCount = $('#item_table tr').length;
+    		if (rowCount==0) {
+    			alert('Račun mora imati barem jednu stavku!');
+    			return false;
+    		};
+
+        	$('#item_table tr').each(function(){
+
+        		var row_code=$(this).find('.code').html();
+        		var row_desc=$(this).find('.description').html();
+        		var row_mod=$(this).find('.module').html();
+        		var row_price=$(this).find('.price').html();
+        		var row_amount=$(this).find('.amount').html();
+        		var row_tax=$(this).find('.tax').html();
+        		
+        	});
+
+    	});
+
 
 
 });
