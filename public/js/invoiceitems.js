@@ -33,6 +33,12 @@ $(document).ready(function(){
 			$("#price").parsley().validate();
 			$("#amount").parsley().validate();
 			$("#tax").parsley().validate();
+			if(!$("#code").parsley().isValid()){return;};
+			if(!$("#description").parsley().isValid()){return;};
+			if(!$("#module").parsley().isValid()){return;};
+			if(!$("#price").parsley().isValid()){return;};
+			if(!$("#amount").parsley().isValid()){return;};
+			if(!$("#tax").parsley().isValid()){return;};
 
 			if ((code.val()=="")||(description.val()=="")||(module.val()=="")||(price.val()=="")||(amount.val()=="")||(tax.val()=="")){
 				alert('Sva polja moraju biti ispunjena');
@@ -118,6 +124,13 @@ $(document).ready(function(){
             $("#buyerAddress").parsley().validate();
             $("#buyerOib").parsley().validate();
             $("#date").parsley().validate();
+            if(!$("#sellerName").parsley().isValid()){return;};
+            if(!$("#sellerAddress").parsley().isValid()){return;};
+            if(!$("#sellerOib").parsley().isValid()){return;};
+            if(!$("#buyerName").parsley().isValid()){return;};
+            if(!$("#buyerAddress").parsley().isValid()){return;};
+            if(!$("#buyerOib").parsley().isValid()){return;};
+            if(!$("#date").parsley().isValid()){return;};
 
             var rowCount = $('#item_table tr').length;
     		if (rowCount==0) {
@@ -133,6 +146,15 @@ $(document).ready(function(){
         		var row_price=$(this).find('.price').html();
         		var row_amount=$(this).find('.amount').html();
         		var row_tax=$(this).find('.tax').html();
+        		var token = $("input[name='_token']").val();
+        		var item_path = $("#invoice_item_route").val();
+
+        		console.log(item_path);
+
+        		$.post( item_path, { _token: token, _method: "POST", code:row_code, description:row_desc, module:row_mod, price:row_price })
+				 .done(function( data ) {
+				  	alert(data);
+				 });
         		
         	});
 

@@ -115,4 +115,12 @@ class ItemController extends Controller
         return redirect()->route('items.create');
 
     }
+
+    public function invoice(Request $request)
+    {
+        //$items = Item::where('item_code', $request->code )->where('company_id', \Auth::user()->company_id)->get();
+        //dd($items);
+        return ('JEEeee');
+    }
+
 }

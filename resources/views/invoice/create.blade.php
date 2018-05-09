@@ -201,9 +201,10 @@
 		</div>
 	</div>
 
+	{!! Form::token() !!}
+
 	<input type="hidden" id="store_route" value="{{ route('invoice.store') }}">
-	<input type="hidden" id="store_item_route" value="{{ route('items.store') }}">
-	<input type="hidden" id="update_item_route" value="{{ route('items.update', ['id' => 'ID']) }}">
+	<input type="hidden" id="invoice_item_route" value="{{ route('items.invoice') }}">
 
 @stop
 

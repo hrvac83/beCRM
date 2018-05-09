@@ -40,6 +40,11 @@ $(document).ready(function(){
 		$('#u-description_'+u_id).parsley().validate();
 		$('#u-module_'+u_id).parsley().validate();
 		$('#u-price_'+u_id).parsley().validate();
+		if(!$('#u-code_'+u_id).parsley().isValid()){return;};
+		if(!$('#u-description_'+u_id).parsley().isValid()){return;};
+		if(!$('#u-module_'+u_id).parsley().isValid()){return;};
+		if(!$('#u-price_'+u_id).parsley().isValid()){return;};
+
 
 		console.log(u_code);
 		$.post( real_path, { _token: token, _method: "PUT", test: "success", description: u_desc, module:u_module, price:u_price, item_code:u_code })
