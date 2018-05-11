@@ -83,7 +83,7 @@ class ItemController extends Controller
 
         //validate data
         $this->validate($request, array(
-            'item_code'=>'unique:items,item_code,'.$id.',id,company_id,'.\Auth::user()->company_id.'|max:15',
+            'code'=>'unique:items,item_code,'.$id.',id,company_id,'.\Auth::user()->company_id.'|max:15',
             'description' => 'max:191',
             'module' => 'max:10',
             'price' => 'numeric'
@@ -91,11 +91,11 @@ class ItemController extends Controller
 
         //save data (update) to database
 
-        Item::where('id',$id)->update(['item_code'=>$request->item_code, 'description'=>$request->description,'module'=>$request->module, 'price'=>$request->price]);
+        Item::where('id',$id)->update(['item_code'=>$request->code, 'description'=>$request->description,'module'=>$request->module, 'price'=>$request->price]);
 
         //flash data
         Session::flash('success', 'Stavka je uspješno uređena');
-        Session::flash('description', 'Šifra: '.$request->item_code.' Opis: '.$request->description.' J.M.: '.$request->module.' Cijena: '.$request->price);
+        Session::flash('description', 'Šifra: '.$request->code.' Opis: '.$request->description.' J.M.: '.$request->module.' Cijena: '.$request->price);
 
         return ('Update successful');
     }
@@ -118,9 +118,18 @@ class ItemController extends Controller
 
     public function invoice(Request $request)
     {
-        //$items = Item::where('item_code', $request->code )->where('company_id', \Auth::user()->company_id)->get();
-        //dd($items);
-        return ('JEEeee');
+        $item = Item::where('item_code', $request->code )->where('company_id', \Auth::user()->company_id)->get();
+
+        if ($item->count()==0){
+            $this->store($request);
+            $item = Item::where('item_code', $request->code )->where('company_id', \Auth::user()->company_id)->get();
+        }
+        else{
+            $this->update($request,$item[0]->id);
+        };
+
+        return $item[0]->id;
+
     }
 
 }

@@ -117,6 +117,7 @@ $(document).ready(function(){
     	$("#create_invoice").click(function(){
 
     		//data validation
+    		$("#invoice_num").parsley().validate();
             $("#sellerName").parsley().validate();
             $("#sellerAddress").parsley().validate();
             $("#sellerOib").parsley().validate();
@@ -124,6 +125,7 @@ $(document).ready(function(){
             $("#buyerAddress").parsley().validate();
             $("#buyerOib").parsley().validate();
             $("#date").parsley().validate();
+            if(!$("#invoice_num").parsley().isValid()){return;};
             if(!$("#sellerName").parsley().isValid()){return;};
             if(!$("#sellerAddress").parsley().isValid()){return;};
             if(!$("#sellerOib").parsley().isValid()){return;};
@@ -132,11 +134,25 @@ $(document).ready(function(){
             if(!$("#buyerOib").parsley().isValid()){return;};
             if(!$("#date").parsley().isValid()){return;};
 
+            var invoice_id=0;
+            var store_route = $("#store_route").val();
+ 			var invoice_item_store = $("#invoice_item_store").val();
+ 			var item_path = $("#item_route").val();
             var rowCount = $('#item_table tr').length;
+            var token = $("input[name='_token']").val();
+    		
     		if (rowCount==0) {
     			alert('Račun mora imati barem jednu stavku!');
     			return false;
     		};
+
+    		$.post( store_route, { _token: token, _method: "POST", invoice_num:$("#invoice_num").val(), seller_name:$("#sellerName").val(), 
+    			seller_address:$("#sellerAddress").val(), seller_oib:$("#sellerOib").val(), buyer_name:$("#buyerName").val(), 
+    			buyer_address:$("#buyerAddress").val(), buyer_oib:$("#buyerOib").val(), invoice_date:$("#date").val(), 
+    			payment_option:$("#payment_option").val(), additional_option:$("#additional").val()  })
+				 .done(function( data ) {
+				 	invoice_id=data;
+				 });
 
         	$('#item_table tr').each(function(){
 
@@ -146,15 +162,18 @@ $(document).ready(function(){
         		var row_price=$(this).find('.price').html();
         		var row_amount=$(this).find('.amount').html();
         		var row_tax=$(this).find('.tax').html();
-        		var token = $("input[name='_token']").val();
-        		var item_path = $("#invoice_item_route").val();
+        		var item_id;
 
-        		console.log(item_path);
-
-        		$.post( item_path, { _token: token, _method: "POST", code:row_code, description:row_desc, module:row_mod, price:row_price })
+        		$.post( item_path, { _token: token, _method: "POST", code:row_code, description:row_desc, module:row_mod, price:row_price})
 				 .done(function( data ) {
-				  	alert(data);
+				 	item_id=data;
 				 });
+
+				 $.post( invoice_item_store, { _token: token, _method: "POST", invoice_id:invoice_id, item_id:item_id, amount:row_amount, tax:row_tax})
+				 .done(function( data ) {
+				 	alert('jeiii');
+				 });
+
         		
         	});
 

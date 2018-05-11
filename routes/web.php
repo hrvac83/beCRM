@@ -26,6 +26,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::post('dashboard/items/invoice', 'ItemController@invoice')->name('items.invoice');
+Route::resource('dashboard/invoice-item', 'InvoiceItemController', ['only' => ['store']]);
 Route::resource('dashboard/company', 'CompanyController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/items', 'ItemController', ['except' => ['show', 'edit']]);
 Route::resource('dashboard/invoice', 'InvoiceController');

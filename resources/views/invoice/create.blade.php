@@ -55,6 +55,14 @@
 
   <h1 class="page-header">Novi račun</h1>
   <form>
+  		<div class="form-row">
+  			<div class="form-group col-md-12">
+  				<div class="col-md-2">
+	  				<label for="invoice_num">Broj računa</label>
+			      	<input type="text" class="form-control" id="invoice_num" required="" value="">
+			    </div>
+  			</div>
+  		</div>
 		<div class="form-row"> 
 	  	<h4 class="page-header">Podaci izdavatelja računa</h4>
 		    <div class="form-group col-md-5">
@@ -204,7 +212,8 @@
 	{!! Form::token() !!}
 
 	<input type="hidden" id="store_route" value="{{ route('invoice.store') }}">
-	<input type="hidden" id="invoice_item_route" value="{{ route('items.invoice') }}">
+	<input type="hidden" id="item_route" value="{{ route('items.invoice') }}">
+	<input type="hidden" id="invoice_item_store" value="{{ route('invoice-item.store') }}">
 
 @stop
 

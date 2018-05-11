@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 
 		console.log(u_code);
-		$.post( real_path, { _token: token, _method: "PUT", test: "success", description: u_desc, module:u_module, price:u_price, item_code:u_code })
+		$.post( real_path, { _token: token, _method: "PUT", test: "success", description: u_desc, module:u_module, price:u_price, code:u_code })
 		  .done(function( data ) {
 		  	alert(data);
 		    location.reload(true);
